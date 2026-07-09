@@ -15,11 +15,11 @@
 
     <!-- Configuración del Paquete NuGet -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>SkiaMD3Expressive.Maui</PackageId>
+    <PackageId>MD3Expressive.Maui</PackageId>
     <Version>1.0.3</Version>
     <Authors>marqzosvaldo</Authors>
     <Description>Librería de componentes Skia para MAUI con Material 3 Expressive.</Description>
-    <RepositoryUrl>https://github.com/marqzosvaldo/SkiaMD3Expressive.Maui</RepositoryUrl>
+    <RepositoryUrl>https://github.com/marqzosvaldo/MD3Expressive.Maui</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
