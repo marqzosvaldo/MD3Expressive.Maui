@@ -193,8 +193,8 @@ namespace SkiaMD3Expressive.Maui.Graphics.Shapes
             float radius = 1f,
             float centerX = 0f,
             float centerY = 0f,
-            CornerRounding rounding = null,
-            List<CornerRounding> perVertexRounding = null)
+            CornerRounding? rounding = null,
+            List<CornerRounding>? perVertexRounding = null)
         {
             if (numVertices < 3)
                 throw new ArgumentException("Polygon must have at least 3 vertices");
@@ -210,8 +210,8 @@ namespace SkiaMD3Expressive.Maui.Graphics.Shapes
 
         public static RoundedPolygon Create(
             float[] vertices,
-            CornerRounding rounding = null,
-            List<CornerRounding> perVertexRounding = null,
+            CornerRounding? rounding = null,
+            List<CornerRounding>? perVertexRounding = null,
             float centerX = float.MinValue,
             float centerY = float.MinValue)
         {
@@ -514,8 +514,8 @@ namespace SkiaMD3Expressive.Maui.Graphics.Shapes
         public static RoundedPolygon Rectangle(
             float width = 2f,
             float height = 2f,
-            CornerRounding rounding = null,
-            List<CornerRounding> perVertexRounding = null,
+            CornerRounding? rounding = null,
+            List<CornerRounding>? perVertexRounding = null,
             float centerX = 0f,
             float centerY = 0f)
         {
@@ -533,9 +533,9 @@ namespace SkiaMD3Expressive.Maui.Graphics.Shapes
             int numVerticesPerRadius,
             float radius = 1f,
             float innerRadius = 0.5f,
-            CornerRounding rounding = null,
-            CornerRounding innerRounding = null,
-            List<CornerRounding> perVertexRounding = null,
+            CornerRounding? rounding = null,
+            CornerRounding? innerRounding = null,
+            List<CornerRounding>? perVertexRounding = null,
             float centerX = 0f,
             float centerY = 0f)
         {

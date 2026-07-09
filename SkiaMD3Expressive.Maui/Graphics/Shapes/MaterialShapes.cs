@@ -10,7 +10,7 @@ namespace SkiaMD3Expressive.Maui.Graphics.Shapes
             public Point O { get; }
             public CornerRounding R { get; }
 
-            public PointNRound(Point o, CornerRounding r = null)
+            public PointNRound(Point o, CornerRounding? r = null)
             {
                 O = o;
                 R = r ?? CornerRounding.Unrounded;
