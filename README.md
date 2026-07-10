@@ -10,7 +10,7 @@ Esta librería expone controles nativos adaptados con rendering fluido de SkiaSh
 
 * **Cero Reserva de Memoria en Animaciones**: Utiliza extensiones optimizadas para mutar geometrías in-place sin generar basura para el GC en cada cuadro.
 * **Estilo Material 3 Expressive**: Formas orgánicas, esquinas redondeadas avanzadas y transformaciones de morfología dinámicas.
-* **Multi-Target**: Soporte nativo para Android, iOS y escritorio.
+* **Multi-Target**: Soporte nativo para Android e iOS.
 
 ---
 
