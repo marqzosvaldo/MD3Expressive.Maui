@@ -5,15 +5,14 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
 using SkiaMD3Expressive.Maui.Graphics.Shapes;
-using SkiaMD3Expressive.Maui.Helpers;
 
 namespace SkiaMD3Expressive.Maui.Controls
 {
-    public class NContainedLoadingIndicator : Grid, IDisposable
+    public class NLoadingIndicator : Grid, IDisposable
     {
         // Bindable properties
         public static readonly BindableProperty ProgressProperty =
-            BindableProperty.Create(nameof(Progress), typeof(double), typeof(NContainedLoadingIndicator), -1.0,
+            BindableProperty.Create(nameof(Progress), typeof(double), typeof(NLoadingIndicator), -1.0,
                 propertyChanged: OnProgressChanged);
 
         public double Progress
@@ -23,7 +22,7 @@ namespace SkiaMD3Expressive.Maui.Controls
         }
 
         public static readonly BindableProperty IndicatorColorProperty =
-            BindableProperty.Create(nameof(IndicatorColor), typeof(Color), typeof(NContainedLoadingIndicator), Color.FromArgb("#0369A1"), // OnPrimaryContainer-ish dark sky blue
+            BindableProperty.Create(nameof(IndicatorColor), typeof(Color), typeof(NLoadingIndicator), Colors.DeepSkyBlue,
                 propertyChanged: OnVisualPropertyChanged);
 
         public Color IndicatorColor
@@ -32,28 +31,8 @@ namespace SkiaMD3Expressive.Maui.Controls
             set => SetValue(IndicatorColorProperty, value);
         }
 
-        public static readonly BindableProperty ContainerColorProperty =
-            BindableProperty.Create(nameof(ContainerColor), typeof(Color), typeof(NContainedLoadingIndicator), Color.FromArgb("#E0F2FE"), // PrimaryContainer-ish light sky blue
-                propertyChanged: OnVisualPropertyChanged);
-
-        public Color ContainerColor
-        {
-            get => (Color)GetValue(ContainerColorProperty);
-            set => SetValue(ContainerColorProperty, value);
-        }
-
-        public static readonly BindableProperty CornerRadiusProperty =
-            BindableProperty.Create(nameof(CornerRadius), typeof(double?), typeof(NContainedLoadingIndicator), null, // null defaults to fully circular
-                propertyChanged: OnVisualPropertyChanged);
-
-        public double? CornerRadius
-        {
-            get => (double?)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
-        }
-
         public static readonly BindableProperty DeterminateTargetProperty =
-            BindableProperty.Create(nameof(DeterminateTarget), typeof(RoundedPolygon), typeof(NContainedLoadingIndicator), null,
+            BindableProperty.Create(nameof(DeterminateTarget), typeof(RoundedPolygon), typeof(NLoadingIndicator), null,
                 propertyChanged: OnDeterminateTargetChanged);
 
         public RoundedPolygon DeterminateTarget
@@ -63,7 +42,7 @@ namespace SkiaMD3Expressive.Maui.Controls
         }
 
         public static readonly BindableProperty IndicatorPolygonsProperty =
-            BindableProperty.Create(nameof(IndicatorPolygons), typeof(IList<RoundedPolygon>), typeof(NContainedLoadingIndicator), null,
+            BindableProperty.Create(nameof(IndicatorPolygons), typeof(IList<RoundedPolygon>), typeof(NLoadingIndicator), null,
                 propertyChanged: OnIndicatorPolygonsChanged);
 
         public IList<RoundedPolygon> IndicatorPolygons
@@ -72,8 +51,28 @@ namespace SkiaMD3Expressive.Maui.Controls
             set => SetValue(IndicatorPolygonsProperty, value);
         }
 
+        public static readonly BindableProperty ContainerColorProperty =
+            BindableProperty.Create(nameof(ContainerColor), typeof(Color), typeof(NLoadingIndicator), Colors.Transparent,
+                propertyChanged: OnVisualPropertyChanged);
+
+        public Color ContainerColor
+        {
+            get => (Color)GetValue(ContainerColorProperty);
+            set => SetValue(ContainerColorProperty, value);
+        }
+
+        public static readonly BindableProperty ContainerCornerRadiusProperty =
+            BindableProperty.Create(nameof(ContainerCornerRadius), typeof(CornerRadius), typeof(NLoadingIndicator), new CornerRadius(4.0),
+                propertyChanged: OnVisualPropertyChanged);
+
+        public CornerRadius ContainerCornerRadius
+        {
+            get => (CornerRadius)GetValue(ContainerCornerRadiusProperty);
+            set => SetValue(ContainerCornerRadiusProperty, value);
+        }
+
         public static readonly BindableProperty GlobalRotationDurationProperty =
-            BindableProperty.Create(nameof(GlobalRotationDuration), typeof(int), typeof(NContainedLoadingIndicator), 4666,
+            BindableProperty.Create(nameof(GlobalRotationDuration), typeof(int), typeof(NLoadingIndicator), 4666,
                 propertyChanged: OnVisualPropertyChanged);
 
         public int GlobalRotationDuration
@@ -83,7 +82,7 @@ namespace SkiaMD3Expressive.Maui.Controls
         }
 
         public static readonly BindableProperty MorphIntervalProperty =
-            BindableProperty.Create(nameof(MorphInterval), typeof(int), typeof(NContainedLoadingIndicator), 650,
+            BindableProperty.Create(nameof(MorphInterval), typeof(int), typeof(NLoadingIndicator), 650,
                 propertyChanged: OnVisualPropertyChanged);
 
         public int MorphInterval
@@ -109,7 +108,7 @@ namespace SkiaMD3Expressive.Maui.Controls
         private static readonly List<Morph> _defaultDeterminateMorphs;
         private static readonly List<Morph> _defaultIndeterminateMorphs;
 
-        static NContainedLoadingIndicator()
+        static NLoadingIndicator()
         {
             // Determinate
             DeterminateStartShape = MaterialShapes.Circle.Transformed((x, y) => {
@@ -157,7 +156,7 @@ namespace SkiaMD3Expressive.Maui.Controls
 
         private static void OnDeterminateTargetChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (bindable is NContainedLoadingIndicator indicator)
+            if (bindable is NLoadingIndicator indicator)
             {
                 if (newValue is RoundedPolygon target)
                 {
@@ -173,7 +172,7 @@ namespace SkiaMD3Expressive.Maui.Controls
 
         private static void OnIndicatorPolygonsChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (bindable is NContainedLoadingIndicator indicator)
+            if (bindable is NLoadingIndicator indicator)
             {
                 indicator._customDeterminateMorphs = null;
                 indicator._customIndeterminateMorphs = null;
@@ -185,7 +184,7 @@ namespace SkiaMD3Expressive.Maui.Controls
 
         private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (bindable is NContainedLoadingIndicator indicator)
+            if (bindable is NLoadingIndicator indicator)
             {
                 indicator.UpdateSemantics();
                 indicator.StartAnimation();
@@ -194,7 +193,7 @@ namespace SkiaMD3Expressive.Maui.Controls
 
         private static void OnVisualPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (bindable is NContainedLoadingIndicator indicator)
+            if (bindable is NLoadingIndicator indicator)
             {
                 indicator.UpdateBrushes();
                 indicator.UpdateNativeLayout();
@@ -207,15 +206,14 @@ namespace SkiaMD3Expressive.Maui.Controls
 
         private SolidColorBrush _indicatorBrush;
         private SolidColorBrush _containerBrush;
-        private readonly PathF _reusableIndicatorPath = new PathF();
 
         private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
         private bool _isAnimating = false;
 
-        public NContainedLoadingIndicator()
+        public NLoadingIndicator()
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("=== [CREATED] NContainedLoadingIndicator ===");
+            System.Diagnostics.Debug.WriteLine("=== [CREATED] NLoadingIndicator ===");
 #endif
             WidthRequest = 48;
             HeightRequest = 48;
@@ -223,8 +221,6 @@ namespace SkiaMD3Expressive.Maui.Controls
 
             _containerShape = new RoundRectangle
             {
-                StrokeThickness = 0,
-                Stroke = null,
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.Fill,
                 InputTransparent = true
@@ -261,9 +257,9 @@ namespace SkiaMD3Expressive.Maui.Controls
         }
 
 #if DEBUG
-        ~NContainedLoadingIndicator()
+        ~NLoadingIndicator()
         {
-            System.Diagnostics.Debug.WriteLine("=== [DESTROYED] NContainedLoadingIndicator ===");
+            System.Diagnostics.Debug.WriteLine("=== [DESTROYED] NLoadingIndicator ===");
         }
 #endif
 
@@ -331,7 +327,7 @@ namespace SkiaMD3Expressive.Maui.Controls
                 {
                     _isAnimating = true;
                     _stopwatch.Restart();
-                    this.Animate("NContainedLoadingIndicatorIndeterminateLoop",
+                    this.Animate("NLoadingIndicatorIndeterminateLoop",
                         callback: v => UpdateNativeLayout(),
                         start: 0,
                         end: 1,
@@ -352,7 +348,7 @@ namespace SkiaMD3Expressive.Maui.Controls
         public void StopAnimation()
         {
             _isAnimating = false;
-            this.AbortAnimation("NContainedLoadingIndicatorIndeterminateLoop");
+            this.AbortAnimation("NLoadingIndicatorIndeterminateLoop");
             _stopwatch.Stop();
         }
 
@@ -450,10 +446,7 @@ namespace SkiaMD3Expressive.Maui.Controls
             float minDim = (float)Math.Min(width, height);
 
             // 1. Update Container Background corner radius
-            float radius = CornerRadius.HasValue
-                ? (float)CornerRadius.Value
-                : minDim / 2f;
-
+            float radius = (float)(ContainerCornerRadius.TopLeft);
             if (_containerShape != null)
             {
                 _containerShape.CornerRadius = radius;
